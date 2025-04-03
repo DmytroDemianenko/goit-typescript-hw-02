@@ -1,0 +1,13 @@
+#root {
+  min-height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+.container {
+  height: auto;
+  margin-top: 0;
+}
+img {
+  display: block;
+}
