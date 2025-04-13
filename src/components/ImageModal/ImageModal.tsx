@@ -2,6 +2,22 @@ import { useEffect } from "react";
 import Modal from "react-modal";
 import s from "./ImageModal.module.css";
 
+// Zakładając, że typ Image jest zdefiniowany w ImageCard.tsx lub w innym miejscu
+interface ImageUrls {
+  regular: string;
+}
+
+interface Image {
+  urls: ImageUrls;
+  alt_description: string;
+}
+
+interface ImageModalProps {
+  onClose: () => void;
+  image: Image;
+  modalIsOpen: boolean;
+}
+
 const customStyles = {
   content: {
     top: "50%",
@@ -13,16 +29,21 @@ const customStyles = {
   },
 };
 
-const ImageModal = ({ onClose, image, modalIsOpen }) => {
+const ImageModal: React.FC<ImageModalProps> = ({
+  onClose,
+  image,
+  modalIsOpen,
+}) => {
   const { urls, alt_description } = image;
-  const handleBackdropClick = (e) => {
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       console.log(e.key);
       if (e.key === "Escape") {
         onClose();
@@ -33,6 +54,7 @@ const ImageModal = ({ onClose, image, modalIsOpen }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose, image]);
+
   return (
     <Modal
       onClick={handleBackdropClick}

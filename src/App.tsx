@@ -8,16 +8,16 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
 import { Toaster } from "react-hot-toast";
+import { Image } from "./types";
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const openModal = (image) => {
     setIsOpen(true);
     setSelectedImage(image);
@@ -54,29 +54,27 @@ function App() {
   };
 
   return (
-    <>
-      <div className="container">
-        <div>
-          <Toaster position="top-center" reverseOrder={false} />
-        </div>
-        <SearchBar handleSubmit={handleSetQuery} />
-        {isError && <ErrorMessage />}
-        {query.length > 0 && (
-          <ImageGallery images={images} openModal={openModal} />
-        )}
-
-        {modalIsOpen && (
-          <ImageModal
-            onClose={closeModal}
-            image={selectedImage}
-            modalIsOpen={modalIsOpen}
-          />
-        )}
-
-        {isLoading && <Loader />}
-        {query.length > 0 && <LoadMoreBtn increasePage={handleChangePage} />}
+    <div className="container">
+      <div>
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
-    </>
+      <SearchBar handleSubmit={handleSetQuery} />
+      {isError && <ErrorMessage />}
+      {query.length > 0 && (
+        <ImageGallery images={images} openModal={openModal} />
+      )}
+
+      {modalIsOpen && (
+        <ImageModal
+          onClose={closeModal}
+          image={selectedImage}
+          modalIsOpen={modalIsOpen}
+        />
+      )}
+
+      {isLoading && <Loader />}
+      {query.length > 0 && <LoadMoreBtn increasePage={handleChangePage} />}
+    </div>
   );
 }
 

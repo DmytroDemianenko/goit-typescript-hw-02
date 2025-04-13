@@ -1,5 +1,19 @@
 import s from "./ImageCard.module.css";
-const ImageCard = ({ image, openModal }) => {
+interface ImageUrls {
+  small: string;
+}
+
+interface Image {
+  urls: ImageUrls;
+  alt_description: string;
+}
+
+interface ImageCardProps {
+  image: Image;
+  openModal: () => void;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ image, openModal }) => {
   const { urls, alt_description } = image;
 
   return (
@@ -17,4 +31,5 @@ const ImageCard = ({ image, openModal }) => {
     </li>
   );
 };
+
 export default ImageCard;
