@@ -1,15 +1,9 @@
 import ImageCard from "../ImageCard/ImageCard";
 import s from "./ImageGallery.module.css";
+import { Image } from "../../types";
 
-// Zakładając, że typ Image jest zdefiniowany w ImageCard.tsx lub w innym miejscu
 interface ImageUrls {
   small: string;
-}
-
-interface Image {
-  id: string; // Dodajemy id, które jest używane jako key i przekazywane do ImageCard
-  urls: ImageUrls;
-  alt_description: string;
 }
 
 interface ImageGalleryProps {

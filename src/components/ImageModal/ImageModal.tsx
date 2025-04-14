@@ -1,15 +1,10 @@
 import { useEffect } from "react";
 import Modal from "react-modal";
 import s from "./ImageModal.module.css";
+import { Image } from "../../types";
 
-// Zakładając, że typ Image jest zdefiniowany w ImageCard.tsx lub w innym miejscu
 interface ImageUrls {
   regular: string;
-}
-
-interface Image {
-  urls: ImageUrls;
-  alt_description: string;
 }
 
 interface ImageModalProps {
